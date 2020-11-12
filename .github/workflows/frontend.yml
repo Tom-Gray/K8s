@@ -6,6 +6,8 @@ name: ReactFrontEnd CI
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'sa-frontend/*'
   pull_request:
     paths:
       - 'sa-frontend/*'
