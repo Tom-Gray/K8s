@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths: 
       - 'sa-logic/*'
+      - '.github/workflows/python-app.yml'
 
 jobs:
   dockerBuild:
