@@ -17,7 +17,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: tom-gray/:latest
+          tags: tom-gray/sentiment-analysis-logic:latest
           context: .
           file: ./sa-logic/Dockerfile
       
