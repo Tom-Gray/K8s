@@ -9,7 +9,7 @@ import Polarity from "./components/Polarity";
 const style = {
     marginLeft: 12,
 };
-const API_ADDRESS=process.env.ENV_VARIABLE
+const SA_MIDDLETIER_API_URL=process.env.SA_MIDDLETIER_API_URL
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        fetch('http://localhost:8080/sentiment', {
+        fetch('SA_MIDDLETIER_API_URL:8080/sentiment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
