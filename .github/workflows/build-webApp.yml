@@ -12,8 +12,9 @@ jobs:
   dockerBuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Docker Build
       - uses: actions/checkout@v2
+      
+      - name: Docker Build
         run: make build SERVICE=webapp
 
       - name: Docker Push

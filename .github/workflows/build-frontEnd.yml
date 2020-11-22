@@ -12,6 +12,7 @@ jobs:
   dockerBuild:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Docker Build
       - uses: actions/checkout@v2
         run: make build SERVICE=frontend
