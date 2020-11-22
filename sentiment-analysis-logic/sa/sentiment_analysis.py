@@ -12,6 +12,7 @@ def analyse_sentiment():
         sentence=sentence,
         polarity=polarity
     )
+    print(f'Sentence receieved: {sentence}. Polarity score: {polarity}')
 
 
 if __name__ == '__main__':
