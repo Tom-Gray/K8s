@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
     paths: 
-      - 'sa-logic/*'
+      - 'sentiment-analysis-logic/*'
       - '.github/workflows/build-logic.yml'
 
 jobs:
