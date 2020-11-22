@@ -1,0 +1,20 @@
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'sa-logic/*'
+      - '.github/workflows/python-app.yml'
+
+jobs:
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: make build SERVICE=logic
+
+      - name: Docker Push
+        run: make push SERVICE=logic
+
