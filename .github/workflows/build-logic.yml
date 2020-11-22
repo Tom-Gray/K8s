@@ -13,9 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - name: Docker Build
-      - uses: actions/checkout@v2
         run: make build SERVICE=logic
+
+      - name: Login to Docker Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Docker Push
         run: make push SERVICE=logic

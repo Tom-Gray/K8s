@@ -17,6 +17,9 @@ jobs:
       - name: Docker Build
         run: make build SERVICE=webapp
 
+      - name: Login to Docker Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        
       - name: Docker Push
         run: make push SERVICE=webapp
 
