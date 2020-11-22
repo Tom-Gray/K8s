@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: sa-web-app
-  replicas: 2
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -21,7 +21,7 @@ spec:
         app: sa-web-app
     spec:
       containers:
-      - image: rinormaloku/sentiment-analysis-web-app
+      - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-webapp:latest
         imagePullPolicy: Always
         name: sa-web-app
         env:
@@ -29,3 +29,8 @@ spec:
             value: "http://sa-logic"
         ports:
           - containerPort: 8080
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+
+
+#https://stackoverflow.com/questions/61912589/how-can-i-use-github-packages-docker-registry-in-kubernetes-dockerconfigjson
