@@ -1,5 +1,5 @@
 APP = sentiment-analysis
-REPO = docker.pkg.github.com/tom-gray/K8s
+REPO = docker.pkg.github.com/tom-gray/k8s
 COMMIT_SHA = $(shell git rev-parse --short HEAD)
 SERVICE ?= 	#[fronted, logic, webapp]
 
