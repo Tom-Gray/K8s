@@ -18,7 +18,3 @@ push:
 	docker push $(REPO)/$(IMAGE_NAME):$(COMMIT_SHA)
 	docker tag $(IMAGE_NAME):$(COMMIT_SHA) $(REPO)/$(IMAGE_NAME):latest
 	docker push $(REPO)/$(IMAGE_NAME):latest
-
-
-compile-webapp:
-	mvn
