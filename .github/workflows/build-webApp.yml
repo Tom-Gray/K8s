@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Docker Build
+      - uses: actions/checkout@v2
         run: make build SERVICE=webapp
 
       - name: Docker Push
