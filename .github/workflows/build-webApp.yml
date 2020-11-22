@@ -1,0 +1,20 @@
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'sentiment-analysis-webapp/*'
+      - '.github/workflows/build-webApp.yml'
+
+jobs:
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: make build SERVICE=webapp
+
+      - name: Docker Push
+        run: make push SERVICE=webapp
+

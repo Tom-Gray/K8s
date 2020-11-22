@@ -1,0 +1,20 @@
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'sentiment-analysis-frontend/*'
+      - '.github/workflows/build-frontEnd.yml'
+
+jobs:
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Build
+        run: make build SERVICE=frontend
+
+      - name: Docker Push
+        run: make push SERVICE=frontend
+
