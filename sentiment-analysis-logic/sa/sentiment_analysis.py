@@ -8,11 +8,12 @@ app = Flask(__name__)
 def analyse_sentiment():
     sentence = request.get_json()['sentence']
     polarity = TextBlob(sentence).sentences[0].polarity
+    print(f'Sentence receieved: {sentence}. Polarity score: {polarity}')
     return jsonify(
         sentence=sentence,
         polarity=polarity
     )
-    print(f'Sentence receieved: {sentence}. Polarity score: {polarity}')
+
 
 
 if __name__ == '__main__':
