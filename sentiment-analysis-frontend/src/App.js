@@ -20,7 +20,13 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        fetch('http://sa.info:80/sentiment', {
+        if (process.env.ENVIRONMENT === 'production') {
+            var apiUrl = 'http://sa.info:80/sentiment';
+        } 
+        else {
+            var apiUrl = 'http://localhost:8080/sentiment';
+        }
+        fetch(apiUrl, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
