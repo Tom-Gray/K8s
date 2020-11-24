@@ -9,6 +9,8 @@ import Polarity from "./components/Polarity";
 const style = {
     marginLeft: 12,
 };
+// if API_BASE_URL is not nil then use it's value, otherwise fall back to the default hardcoded url.
+const apiUrl = process.env.API_BASE_URL ? process.env.API_BASE_URL : 'http://localhost:8080/sentiment';
 
 class App extends Component {
     constructor(props) {
@@ -20,12 +22,6 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        if (process.env.ENVIRONMENT === 'production') {
-            var apiUrl = 'http://sa.info:80/sentiment';
-        } 
-        else {
-            var apiUrl = 'http://localhost:8080/sentiment';
-        }
         fetch(apiUrl, { 
             method: 'POST',
             headers: {

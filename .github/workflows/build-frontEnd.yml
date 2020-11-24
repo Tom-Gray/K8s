@@ -6,7 +6,7 @@ on:
   push:
     branches: [ main ]
     paths: 
-      - 'sentiment-analysis-frontend/*'
+      - 'sentiment-analysis-frontend/**'
       - '.github/workflows/build-frontEnd.yml'
 
 jobs:
