@@ -21,7 +21,7 @@ class App extends Component {
 
     analyzeSentence() {
         if (window.location.hostname === 'sa.info') {
-            var apiUrl = 'http://sa.info/sentiment'
+            var apiUrl = 'http://api.sa.info/sentiment'
         } else {
             var apiUrl = 'http://localhost:8080/sentiment'
         }
