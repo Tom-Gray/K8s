@@ -20,7 +20,7 @@ class App extends Component {
     };
 
     analyzeSentence() {
-        if (window.location.hostname === 'http://sa.info') {
+        if (window.location.hostname === 'sa.info') {
             var apiUrl = 'http://sa.info/sentiment'
         } else {
             var apiUrl = 'http://localhost:8080/sentiment'
