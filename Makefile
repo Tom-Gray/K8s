@@ -1,7 +1,7 @@
 APP = sentiment-analysis
 REPO = docker.pkg.github.com/tom-gray/k8s
 COMMIT_SHA = $(shell git rev-parse --short HEAD)
-SERVICE ?= 	#[fronted, logic, webapp]
+SERVICE ?= 	#[fronted, logic, webapp, webapp-go]
 
 IMAGE_NAME = $(APP)-$(SERVICE)
 

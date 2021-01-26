@@ -1,0 +1,26 @@
+
+name: MiddleTier
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths: 
+      - 'sentiment-analysis-webapp-go/*'
+      - '.github/workflows/build-webApp-go.yml'
+
+jobs:
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Docker Build
+        run: make build SERVICE=webapp-go
+
+      - name: Login to Docker Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        
+      - name: Docker Push
+        run: make push SERVICE=webapp
+
