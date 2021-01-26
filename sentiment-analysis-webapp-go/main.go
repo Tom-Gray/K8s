@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 //What we send to the API
@@ -78,7 +79,14 @@ func main() {
 	// router.HandleFunc("/books/{id}", updateBook).Methods("PUT")
 	// router.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowCredentials: true,
+	})
+
+	handler := c.Handler(router)
+	log.Fatal(http.ListenAndServe(":8080", handler))
+
 }
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
