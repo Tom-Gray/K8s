@@ -13,7 +13,7 @@ build:
 
 
 push:
-	docker tag $(IMAGE_NAME):$(COMMIT_SHA) $(REPO)/$(IMAGE_NAME):$(COMMIT_SHA)
-	docker push $(REPO)/$(IMAGE_NAME):$(COMMIT_SHA)
-	docker tag $(IMAGE_NAME):$(COMMIT_SHA) $(REPO)/$(IMAGE_NAME):latest
-	docker push $(REPO)/$(IMAGE_NAME):latest
+	docker tag $(IMAGE_NAME):$(COMMIT_SHA) swinkstom/$(IMAGE_NAME):$(COMMIT_SHA)
+	docker push swinkstom/$(IMAGE_NAME):$(COMMIT_SHA)
+	docker tag $(IMAGE_NAME):$(COMMIT_SHA) swinkstom/$(IMAGE_NAME):latest
+	docker push swinkstom/$(IMAGE_NAME):latest
