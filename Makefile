@@ -1,10 +1,9 @@
 APP = sentiment-analysis
-REPO = docker.pkg.github.com/tom-gray/k8s
+REPO = swinkstom #Docker hub account
 COMMIT_SHA = $(shell git rev-parse --short HEAD)
-SERVICE ?= 	#[fronted, logic, webapp, webapp-go]
+SERVICE ?= 	#[frontend, logic, webapp, webapp-go]
 
 IMAGE_NAME = $(APP)-$(SERVICE)
-
 
 
 build:
