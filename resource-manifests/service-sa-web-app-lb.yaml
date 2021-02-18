@@ -10,4 +10,4 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: sa-web-app
+    app: sa-web-app-go

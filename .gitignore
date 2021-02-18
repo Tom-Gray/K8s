@@ -13,3 +13,6 @@ target/
 # IDE ignored files
 .idea/
 *.iml
+
+# local secrets
+resource-manifests/github_secret.yaml

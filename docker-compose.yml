@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  frontend:
+    image: swinkstom/sentiment-analysis-frontend:latest
+    ports:
+      - "80:80"
+  webApi:
+    environment: 
+      - SA_LOGIC_API_URL=http://backEnd:5000
+    image: swinkstom/sentiment-analysis-webapp-go:latest
+    ports:
+      - "8080:8080" #this value is hardcoded in the frontend code. It musnt change.
+  backEnd:
+    image: swinkstom/sentiment-analysis-logic:latest
+    ports: 
+      - "5000:5000"
+
+
