@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: sa-web-app
-  replicas: 1
+  replicas: 0
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -21,7 +21,7 @@ spec:
         app: sa-web-app
     spec:
       containers:
-      - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-webapp:latest
+      - image: swinkstom/sentiment-analysis-webapp:latest
         imagePullPolicy: Always
         name: sa-web-app
         env:

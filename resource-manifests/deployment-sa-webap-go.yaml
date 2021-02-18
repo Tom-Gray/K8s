@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sa-web-app
+  name: sa-web-app-go
   labels:
-    app: sa-web-app
+    app: sa-web-app-go
 spec:
   selector:
     matchLabels:
-      app: sa-web-app
+      app: sa-web-app-go
   replicas: 1
   minReadySeconds: 15
   strategy:
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: sa-web-app
+        app: sa-web-app-go
     spec:
       containers:
-      - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-webapp-go:latest
+      - image: swinkstom/sentiment-analysis-webapp-go:latest
         imagePullPolicy: Always
-        name: sa-web-app
+        name: sa-web-app-go
         env:
           - name: SA_LOGIC_API_URL
             value: "http://sa-logic"
