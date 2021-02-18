@@ -21,7 +21,7 @@ spec:
         app: sa-logic
     spec:
       containers:
-        - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-logic:latest
+        - image: swinkstom/sentiment-analysis-logic:latest
           imagePullPolicy: Always
           name: sa-logic
           ports:

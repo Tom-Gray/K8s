@@ -21,7 +21,7 @@ spec:
         app: sa-web-app-go
     spec:
       containers:
-      - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-webapp-go:latest
+      - image: swinkstom/sentiment-analysis-webapp-go:latest
         imagePullPolicy: Always
         name: sa-web-app-go
         env:

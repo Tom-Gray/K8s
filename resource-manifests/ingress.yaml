@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1  ## if you're on kube 1.19 plus this is no longer beta
+apiVersion: networking.k8s.io/v1 #networking.k8s.io/v1beta1  ## if you're on kube 1.19 plus this is no longer beta
 kind: Ingress
 metadata:
   name: web-app-ingress
@@ -10,18 +10,24 @@ spec:
       - path: /sentiment
         pathType: Prefix
         backend:
-          serviceName: sa-web-app-lb
-          servicePort: 80
+          service:
+            name: sa-web-app-lb
+            port:
+              number: 80
       - path: /testHealth
         pathType: Prefix
         backend:
-          serviceName: sa-web-app-lb
-          servicePort: 8080
+          service:
+            name: sa-web-app-lb
+            port:
+              number: 8080
   - host: sa.info
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
-          serviceName: sa-frontend-lb
-          servicePort: 80
+          service:
+            name: sa-frontend-lb
+            port:
+              number: 80

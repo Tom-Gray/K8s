@@ -21,7 +21,7 @@ spec:
         app: sa-frontend                                  # 6
     spec:
       containers:
-        - image: docker.pkg.github.com/tom-gray/k8s/sentiment-analysis-frontend:latest
+        - image: swinkstom/sentiment-analysis-frontend:latest
           imagePullPolicy: Always                         # 7
           name: sa-frontend
           ports:
