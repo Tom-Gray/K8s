@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,8 +20,8 @@ type SentenceRequest struct {
 
 //What we get back from the API
 type SentenceData struct {
-	Sentence string
-	Polarity int
+	Sentence string  `json:"sentence"`
+	Polarity float64 `json:"polarity"`
 }
 
 func doTheThings(w http.ResponseWriter, r *http.Request) {
@@ -28,56 +29,47 @@ func doTheThings(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Sentence received")
 	body, _ := ioutil.ReadAll(r.Body)
 	sb := string(body)
-	//extract sentence json and send that to the poster function
-	response := post(sb)
-	postBody, err := json.Marshal(map[string]interface{}(response))
+	score := getSentencePolarity(sb)
+	response := SentenceData{
+		Sentence: sb,
+		Polarity: score,
+	}
+
+	postBody, err := json.Marshal(response)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//write the response back
-	w.Write([]byte(postBody))
+	fmt.Println(postBody)
+	w.Write(postBody)
 
 }
 
-//'{"sentence": "i love you"}'
-func post(sentence string) map[string]interface{} {
-
+// takes a sentence and sends it to downstream service to calculate polarity
+func getSentencePolarity(sentence string) float64 {
 	SA_LOGIC_API_URL := os.Getenv("SA_LOGIC_API_URL")
-	//Encode the data
-	postBody, _ := json.Marshal(map[string]string{
-		"sentence": sentence,
-	})
-	responseBody := bytes.NewBuffer(postBody)
-	//Leverage Go's HTTP Post function to make request
-	resp, err := http.Post(SA_LOGIC_API_URL+"/analyse/sentiment", "application/json", responseBody)
-	//Handle Error
+	sentencejson := SentenceRequest{
+		Sentence: sentence,
+	}
+	postBodyinBytes, _ := json.Marshal(sentencejson)
+
+	resp, err := http.Post(SA_LOGIC_API_URL+"/analyse/sentiment", "application/json", bytes.NewBuffer(postBodyinBytes))
 	if err != nil {
-		log.Fatalf("An Error Occured %v", err)
+		log.Fatalf("errors: %v", err)
 	}
 	defer resp.Body.Close()
-	//Read body to json
+	fmt.Println("response Status:", resp.Status)
+	fmt.Println("response Headers:", resp.Header)
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
 
-	//Read the response body
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	obj := map[string]interface{}{}
-	if err := json.Unmarshal([]byte(body), &obj); err != nil {
-		log.Fatal(err)
-	}
-	log.Println(obj)
-	return obj
-
+	return 1 //return polarity score somehow.
 }
 
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/sentiment", doTheThings).Methods("POST")
-	// router.HandleFunc("/books", createBook).Methods("POST")
 	router.HandleFunc("/health", healthcheck).Methods("GET")
-	// router.HandleFunc("/books/{id}", updateBook).Methods("PUT")
-	// router.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
