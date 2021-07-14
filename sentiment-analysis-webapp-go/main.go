@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
@@ -31,7 +32,6 @@ func doTheThings(w http.ResponseWriter, r *http.Request) {
 
 	score := getSentencePolarity(sb)
 	response := SentenceData{
-
 		Sentence: sentenceSubmission.Sentence,
 		Polarity: score,
 	}
@@ -41,7 +41,6 @@ func doTheThings(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	//write the response back
-	fmt.Println(postBody)
 	w.Write(postBody)
 
 }
@@ -52,7 +51,7 @@ type Result struct {
 
 // takes a sentence and sends it to downstream service to calculate polarity
 func getSentencePolarity(sentence string) float64 {
-	SA_LOGIC_API_URL := "http://0.0.0.0:5000" //http://10.109.19.74" //os.Getenv("SA_LOGIC_API_URL")
+	SA_LOGIC_API_URL := os.Getenv("SA_LOGIC_API_URL")
 	resp, err := http.Post(SA_LOGIC_API_URL+"/analyse/sentiment", "application/json", bytes.NewBuffer([]byte(sentence)))
 	if err != nil {
 		log.Fatalf("errors: %v", err)
