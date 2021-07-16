@@ -71,6 +71,7 @@ func getSentencePolarity(sentence string) float64 {
 
 func main() {
 	router := mux.NewRouter()
+	router.Use(commonMiddleware)
 	router.HandleFunc("/sentiment", doTheThings).Methods("POST")
 	router.HandleFunc("/health", healthcheck).Methods("GET")
 
@@ -86,6 +87,14 @@ func main() {
 	handler := c.Handler(router)
 	log.Fatal(http.ListenAndServe(":8080", handler))
 
+}
+
+func commonMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Content-Type", "application/json")
+		w.Header().Add("Access-Control-Allow-Headers", "*")
+		next.ServeHTTP(w, r)
+	})
 }
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
