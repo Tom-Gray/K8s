@@ -77,7 +77,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:     []string{"*"},
 		AllowCredentials:   true,
-		AllowedHeaders:     []string{"Origin, X-Requested-With, Content-Type, Accept, Authorization"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
+		AllowedHeaders:     []string{"Origin, X-Requested-With, Content-Type, content-type, Accept, Authorization"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
 		AllowedMethods:     []string{"GET,PUT,POST,DELETE,PATCH,OPTIONS"},
 		OptionsPassthrough: true,
 	})
