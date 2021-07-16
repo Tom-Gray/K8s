@@ -74,13 +74,7 @@ func main() {
 	router.HandleFunc("/sentiment", doTheThings).Methods("POST")
 	router.HandleFunc("/health", healthcheck).Methods("GET")
 
-	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowCredentials: true,
-		AllowedHeaders:   []string{"Content-Type"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
-	})
-
-	handler := c.Handler(router)
+	handler := cors.Default().Handler(router)
 	log.Fatal(http.ListenAndServe(":8080", handler))
 
 }
