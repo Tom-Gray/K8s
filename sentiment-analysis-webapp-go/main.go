@@ -75,9 +75,10 @@ func main() {
 	router.HandleFunc("/health", healthcheck).Methods("GET")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowCredentials: true,
-		AllowedHeaders:   []string{"Origin, X-Requested-With, Content-Type, Accept, Authorization"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
+		AllowedOrigins:     []string{"*"},
+		AllowCredentials:   true,
+		AllowedHeaders:     []string{"Origin, X-Requested-With, Content-Type, Accept, Authorization"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
+		OptionsPassthrough: true,
 	})
 
 	cors.Default().Handler(router)
