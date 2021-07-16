@@ -77,6 +77,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
+		AllowedHeaders:   []string{"Content-Type"}, //https://stackoverflow.com/questions/40985920/making-golang-gorilla-cors-handler-work
 	})
 
 	handler := c.Handler(router)
