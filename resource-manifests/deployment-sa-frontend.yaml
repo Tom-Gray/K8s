@@ -4,6 +4,7 @@ metadata:
   name: sa-frontend
   labels:
     app: sa-frontend
+    deployment: blue
 spec:
   selector:
     matchLabels:

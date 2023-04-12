@@ -29,7 +29,7 @@ jobs:
         run: make push SERVICE=logic
       - name: Patch Manifest
         if: github.ref == 'refs/heads/main'
-        run: make patch_manifest SERVICE=frontend MANIFEST_FILE=resource-manifests/deployment-sa-logic.yaml
+        run: make patch_manifest SERVICE=logic MANIFEST_FILE=resource-manifests/deployment-sa-logic.yaml
       - name: Push Manifest changes
         run: |
           git config --global user.name 'Tom Gray'

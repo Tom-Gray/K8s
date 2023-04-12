@@ -21,7 +21,7 @@ spec:
         app: sa-web-app-go
     spec:
       containers:
-        - image: swinkstom/sentiment-analysis-frontend:ee2c58f
+        - image: swinkstom/sentiment-analysis-webapp-goee2c58f
           imagePullPolicy: Always
           name: sa-web-app-go
           env:
