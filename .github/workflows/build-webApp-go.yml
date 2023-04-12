@@ -34,5 +34,6 @@ jobs:
         run: |
           git config --global user.name 'Tom Gray'
           git config --global user.email 'tom-gray@users.noreply.github.com'
+          git pull
           git commit -am "Bump image version"
           git push
