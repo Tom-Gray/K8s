@@ -6,22 +6,22 @@ metadata:
     app: sa-logic
 spec:
   selector:
-     matchLabels:
-       app: sa-logic
+    matchLabels:
+      app: sa-logic
   replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
-    rollingUpdate: 
+    rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 1 
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: sa-logic
     spec:
       containers:
-        - image: swinkstom/sentiment-analysis-logic:latest
+        - image: swinkstom/sentiment-analysis-frontend:0aecd62
           imagePullPolicy: Always
           name: sa-logic
           ports:
