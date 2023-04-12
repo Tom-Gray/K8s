@@ -4,7 +4,8 @@ name: Backend
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: 
+      - main
     paths: 
       - 'sentiment-analysis-logic/*'
       - '.github/workflows/build-logic.yml'

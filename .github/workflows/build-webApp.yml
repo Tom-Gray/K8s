@@ -4,7 +4,8 @@ name: MiddleTier
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: 
+      - main
     paths: 
       - 'sentiment-analysis-webapp/*'
       - '.github/workflows/build-webApp.yml'
