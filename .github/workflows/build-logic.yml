@@ -1,5 +1,5 @@
 
-name: Backend
+name: Logic-Backend
 
 on:
   workflow_dispatch:
@@ -27,4 +27,13 @@ jobs:
 
       - name: Docker Push
         run: make push SERVICE=logic
+      - name: Patch Manifest
+        if: github.ref == 'refs/heads/main'
+        run: make patch_manifest SERVICE=frontend MANIFEST_FILE=resource-manifests/deployment-sa-logic.yaml
+      - name: Push Manifest changes
+        run: |
+          git config --global user.name 'Tom Gray'
+          git config --global user.email 'tom-gray@users.noreply.github.com'
+          git commit -am "Bump image version"
+          git push
 
