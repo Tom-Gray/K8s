@@ -2,6 +2,9 @@ apiVersion: networking.k8s.io/v1 #networking.k8s.io/v1beta1  ## if you're on kub
 kind: Ingress
 metadata:
   name: web-app-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   rules:
   - host: api.sa.info

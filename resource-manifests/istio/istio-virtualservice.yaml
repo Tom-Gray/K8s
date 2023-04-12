@@ -1,0 +1,68 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: http-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sa-external-services
+spec:
+  hosts:
+  - "sa.info"
+  gateways:
+  - http-gateway                     
+  http:
+  - match:
+    - uri:
+        exact: ""
+    - uri:
+        prefix: /
+    - uri:
+        regex: '^.*\.(ico|png|jpg)$'
+    route:
+    - destination:
+        host: sa-frontend-lb #frontend service       
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sa-api-external-services
+spec:
+  hosts:
+  - "api.sa.info"
+  gateways:
+  - http-gateway                     
+  http:
+  - match:
+    - uri:
+        prefix: /health
+    - uri:
+        prefix: /sentiment
+    route:
+    - destination:
+        host: sa-web-app-lb #web service       
+        port:
+          number: 80
+    corsPolicy:
+      allowOrigins:
+      - exact: http://sa.info
+      - exact: https://api.sa.info
+      allowMethods:
+      - POST
+      - GET
+      - OPTIONS
+      allowHeaders:
+      - "*"
