@@ -7,7 +7,7 @@ on:
     branches: 
       - main
     paths: 
-      - 'sentiment-analysis-webapp-go/*'
+      - 'sentiment-analysis-webapp-go/**'
       - '.github/workflows/build-webApp-go.yml'
 
 jobs:

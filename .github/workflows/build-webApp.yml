@@ -7,7 +7,7 @@ on:
     branches: 
       - main
     paths: 
-      - 'sentiment-analysis-webapp/*'
+      - 'sentiment-analysis-webapp/**'
       - '.github/workflows/build-webApp.yml'
 
 jobs:

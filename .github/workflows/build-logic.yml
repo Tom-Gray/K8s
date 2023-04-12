@@ -7,7 +7,7 @@ on:
     branches: 
       - main
     paths: 
-      - 'sentiment-analysis-logic/*'
+      - 'sentiment-analysis-logic/**'
       - '.github/workflows/build-logic.yml'
 
 jobs:
