@@ -12,25 +12,23 @@ spec:
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
-    rollingUpdate: 
+    rollingUpdate:
       maxUnavailable: 1
-      maxSurge: 1 
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: sa-web-app-go
     spec:
       containers:
-      - image: swinkstom/sentiment-analysis-webapp-go:latest
-        imagePullPolicy: Always
-        name: sa-web-app-go
-        env:
-          - name: SA_LOGIC_API_URL
-            value: "http://sa-logic"
-        ports:
-          - containerPort: 8080
+        - image: swinkstom/sentiment-analysis-frontend:ee2c58f
+          imagePullPolicy: Always
+          name: sa-web-app-go
+          env:
+            - name: SA_LOGIC_API_URL
+              value: "http://sa-logic"
+          ports:
+            - containerPort: 8080
       imagePullSecrets:
         - name: dockerconfigjson-github-com
-
-
 #https://stackoverflow.com/questions/61912589/how-can-i-use-github-packages-docker-registry-in-kubernetes-dockerconfigjson
