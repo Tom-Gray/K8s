@@ -28,3 +28,7 @@ jobs:
       - name: Docker Push
         run: make push SERVICE=frontend
 
+      - name: Patch Manifest
+        if: github.ref == 'refs/heads/main'
+        run: make patch_manifest SERVICE=frontend MANIFEST_FILE=resource-manifests/deployment-sa-frontend.yaml
+
