@@ -4,7 +4,8 @@ name: FrontEnd
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: 
+      - main
     paths: 
       - 'sentiment-analysis-frontend/**'
       - '.github/workflows/build-frontEnd.yml'
