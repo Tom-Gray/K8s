@@ -1,4 +1,4 @@
-A small microservices app I slapped together to help learn kube networking. 
+Practing running services in kube. 
 
 ## What is it?
 
@@ -9,37 +9,22 @@ A backend API that takes input and returns an output. (Python)
 Plus all the docker and kube manifests required to build it and run it in kubernetes.
 
 
-## minikube setup
+## KinD setup
 
-Install minikube with brew:
-    brew install minikube
+```
+cd kind
+make create
 
-Start minikube
-    minikube start
-
-Enable ingress controllers for minikube:
-    minikube addons enable ingress
-
-My minikube version was 1.15.1
-Kubernetes version 1.18
+```
 
 
 I hardcoded some URLs to make it easy to run locally while simulating a real world scnenario.
 
-Run
-    minikube ip
+
 
 to get the IP address of your local minikube. The add the following to your /etc/hosts file:
-    <minikube address> sa.info
-    <minikube address> api.sa.info
-
-If you ever reinstall minikube you might need to double check this IP address to make sure it hasnt changed.
-
-The app uses the Kube LoadBalancer service. To make these work with Minikube you must run 
-
-    minikube tunnel
-
-in a seperate terminal. (it will ask for your login password)
+   127.0.0.1 sa.info
+   127.0.0.1 api.sa.info
 
 
 
