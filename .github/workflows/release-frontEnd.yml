@@ -27,7 +27,8 @@ jobs:
 
       - name: Patch Manifest
         if: github.ref == 'refs/heads/main'
-        run: make patch_manifest TAG=${{github.ref_name}} SERVICE=frontend MANIFEST_FILE=resource-manifests/deployment-sa-frontend.yaml
+        run: | 
+          make patch_manifest TAG=${{github.ref_name}} DEPLOYMENT_MANIFEST=resource-manifests/deployment-sa-frontend.yaml SERVICE_MANIFEST=resource-manifests/service-sa-frontend-lb.yaml
       - name: Push Manifest changes
         run: |
           git config --global user.name 'Tom Gray'
