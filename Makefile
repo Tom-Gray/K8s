@@ -5,7 +5,8 @@ TAG ?=
 SERVICE ?= 	#[frontend, logic, webapp, webapp-go]
 
 IMAGE_NAME = $(APP)-$(SERVICE)
-MANFIEST_FILE ?= 
+DEPLOYMENT_MANIFEST ?= 
+SERVICE_MANIFEST ?= 
 
 build:
 	docker build \
@@ -20,6 +21,14 @@ push:
 	docker push swinkstom/$(IMAGE_NAME):latest
 
 
-patch_manifest:
-	yq '.spec.template.spec.containers[0].image = "$(REPO)/$(IMAGE_NAME):$(COMMIT_SHA)"' -i $(MANIFEST_FILE) 
-	yq '.metadata.labels.version = "$(TAG)"' -i $(MANIFEST_FILE)
+patch_manifest: 
+	yq '.spec.template.spec.containers[0].image = "$(REPO)/$(IMAGE_NAME):$(COMMIT_SHA)"' -i $(DEPLOYMENT_MANIFEST) 
+	yq '.metadata.labels.version = "$(TAG)"' -i $(DEPLOYMENT_MANIFEST) 
+	yq '.spec.selector.version = "$(TAG)"' -i $(SERVICE_MANIFEST) 
+
+
+
+#	make patch_manifest \
+	TAG=2.0.0 SERVICE=frontend \
+	DEPLOYMENT_MANIFEST=resource-manifests/deployment-sa-frontend.yaml \
+	SERVICE_MANIFEST=resource-manifests/service-sa-frontend-lb.yaml
