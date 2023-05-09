@@ -1,0 +1,38 @@
+
+name: Release FrontEnd
+
+on:
+  workflow_dispatch:
+  push:
+        tags:        
+        - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  dockerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Docker Build
+        run: make build SERVICE=frontend
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Push
+        run: make push SERVICE=frontend
+
+      - name: Patch Manifest
+        if: github.ref == 'refs/heads/main'
+        run: make patch_manifest TAG=${{github.ref_name}} SERVICE=frontend MANIFEST_FILE=resource-manifests/deployment-sa-frontend.yaml
+      - name: Push Manifest changes
+        run: |
+          git config --global user.name 'Tom Gray'
+          git config --global user.email 'tom-gray@users.noreply.github.com'
+          git pull
+          git commit -am "Bump image version"
+          git push
+

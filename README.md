@@ -22,6 +22,7 @@ I hardcoded some URLs to make it easy to run locally while simulating a real wor
 
 Add the following to your /etc/hosts file:
    127.0.0.1 sa.info
+
    127.0.0.1 api.sa.info
 
 
